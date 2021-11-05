@@ -1,0 +1,56 @@
+html {
+   font-family: 'Nunito Sans', sans-serif;
+   padding-top: 30px;
+}
+
+.tab-list-item {
+   color:white;
+   background-color: rgb(121, 121, 255);
+   font-weight: 600;
+   text-align: center;
+   width: 300px;
+   display: inline-block;
+   margin-right: 5%;
+   border-radius: 30px;
+   height: 30px;
+   vertical-align: middle;
+   line-height: 30px;
+   cursor:pointer;
+}
+
+.tab-list-item:hover {
+   background-color: rgb(60, 90, 255);
+}
+.tab-list-active {
+ 
+   background-color:rgb(58, 58, 250) ;
+   
+}
+
+.book {
+   border: whitesmoke 1px solid;
+   border-radius: 30px;
+   padding: 16px;
+   margin: 30px;
+}
+
+.author {
+   font-size: medium;
+   font-weight: 600;
+}
+
+.title {
+   font-size: large;
+   font-weight: 600;
+}
+
+.rentDate, .returnDate {
+   font-size: small;
+   font-weight: 100;
+}
+
+
+
+div {
+   margin-bottom: 20px;
+}

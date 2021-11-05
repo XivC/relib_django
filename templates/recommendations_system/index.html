@@ -1,0 +1,50 @@
+{% load static %}
+<html lang="">
+
+<head>
+    <title>Библиотеки Москвы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;600&display=swap" rel="stylesheet">
+
+    <link href="{% static 'index.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div id='container'></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="{% static 'components/network.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/profile.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/book.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/history.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/recommendations.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/tab.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/tabs.js' %}" type="text/babel"></script>
+    <script src="{% static 'components/app.js' %}" type="text/babel"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+            <div class="toast-header">
+            
+              <strong class="mr-auto">Rebux</strong>
+              <small>Ошибка</small>
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+
+    </body>
+
+</html>
