@@ -19,7 +19,7 @@ class App extends React.Component {
 
 
     process(response) {
-    if (typeof response.history !== 'undefined' && response.history.length > 0 && typeof response.recommendations !== 'undefined' && response.recommendations.length > 0 ){
+    if (typeof response.recommendations !== 'undefined' && response.recommendations.length > 0 ){
         this.setState({history: response.history, recommendations: response.recommendations});
     }
     else {

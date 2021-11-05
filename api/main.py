@@ -6,7 +6,7 @@ from datetime import datetime
 if __name__ == "__main__":
     dataset.load('dataset/')
 
-    delta = 0
+    delta = 123
     parts = 6
     count = len(dataset.user_books.keys())
     start = int(count / parts) * delta
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     ct = end - start
     n = 0
 
-    for user in list(dataset.user_books.keys())[start:end]:
+    for user in list(dataset.user_books.keys()):
         n += 1
         time = datetime.now()
         try:
