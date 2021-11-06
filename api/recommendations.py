@@ -107,6 +107,8 @@ def build_ontology_graph(): #построение графа онтологии
     graph = {}
     def dfs(node, root=None):
         for key in node.keys():
+            if key in graph:
+                continue
             graph[key] = {
                 'rubrics': key,
                 'parent': root,
