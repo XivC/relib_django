@@ -22,6 +22,7 @@ def init_global_fields(dataset):
     ontology = dataset.ontology
 
 
+#Возвращает конечный ответ
 def get_response(user_id, dataset):
     init_global_fields(dataset)
     history = get_history(user_id)
@@ -31,7 +32,7 @@ def get_response(user_id, dataset):
         'recommendations': recommendations,
     }
 
-
+#получить историю пользователя
 def get_history(user_id):
     if user_id not in user_books:
         return []
@@ -39,11 +40,12 @@ def get_history(user_id):
         return [book_info[book_id] for book_id in user_books[user_id]]
 
 
+#Метод расчёта рекомендаций
 def get_recommendations(history, count, user_id):
     if len(history) == 0:
-        return get_most_popular_books()[:count]
+        return get_most_popular_books()[:count] #Если пользователь ничего не читал - вызываем холодный старт
     else:
-        nodes, graph = get_ontology_nodes(history, count)
+        nodes, graph = get_ontology_nodes(history, count) # считаем веса в графе онтологии
         nodes = nodes[:5]
         table = [
             [(0, 5)],
@@ -57,13 +59,13 @@ def get_recommendations(history, count, user_id):
         row = table[len(nodes) - 1]
         for node_index, node_count in row:
             rubrics = nodes[node_index]['rubrics']
-            history_of_interest = get_history_of_interest(history, graph, rubrics, 15 / len(table[len(nodes) - 1]))
+            history_of_interest = get_history_of_interest(history, graph, rubrics, 15 / len(table[len(nodes) - 1])) #выделяем из истории вектор, соответствующий выбранным рубрикам
             best = get_best_books_for_rubrics(history_of_interest, rubrics, user_id)
             for book in best[:node_count]:
                 answer.append(book)
             for additional in best[node_count:node_count+count]:
                 reseve.append(additional)
-        for additional in reseve:
+        for additional in reseve: #Если в какой-то из рубрик не набралось нужного числа книг - добираем до квоты из других рекомендованных рубрик
             if len(answer) < count:
                 answer.append(additional)
         return answer
@@ -79,7 +81,7 @@ def get_most_popular_books():
     ]
 
 
-def get_ontology_nodes(history, count):
+def get_ontology_nodes(history, count): #Наложение интересов на граф онтологии ( подробно в документации)
     graph = build_ontology_graph()
     stats = {}
     for book in history:
@@ -101,7 +103,7 @@ def get_ontology_nodes(history, count):
     ), graph
 
 
-def build_ontology_graph():
+def build_ontology_graph(): #построение графа онтологии
     graph = {}
     def dfs(node, root=None):
         for key in node.keys():
@@ -128,7 +130,7 @@ def build_ontology_graph():
     return graph
 
 
-def get_history_of_interest(history, graph, rubrics, count):
+def get_history_of_interest(history, graph, rubrics, count): #выделение целевого вектора из истории
     def dfs(node):
         for child in node['children']:
             if child['rubrics'] == rubrics:
