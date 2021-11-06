@@ -4,14 +4,13 @@ import traceback
 from importlib import reload
 from datetime import datetime
 import json
-import sys
-import subprocess
+
 def main(delta):
     print(delta)
     dataset.load('dataset/')
 
     
-    parts = 1000
+    parts = 6
     count = len(dataset.user_books.keys())
     start = int(count / parts) * delta
     end = int(count / parts) * (delta + 1)
@@ -19,7 +18,7 @@ def main(delta):
     ct = end - start
     n = 0
 
-    for user in list(dataset.user_books.keys())[0:5000]:
+    for user in list(dataset.user_books.keys())[start:end]:
         n += 1
         time = datetime.now()
         try:
