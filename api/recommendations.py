@@ -154,14 +154,15 @@ def get_history_of_interest(history, graph, rubrics, count): #выделение
                 break
     return answer
 
-
+#Выделяем ркомендованные книги по каждой рубрике
+#На вход подаётся история пользователя, его id и целевая рубрика
 def get_best_books_for_rubrics(history, rubrics, user_from_id):
-    my_ids = {}
+    my_ids = {} #сохраняем сюда книги, которые пользователь уже брал
     for book in history:
         my_ids[book['book_id']] = True
     book_weights = {}
     for book_from in history:
-        for user_to_id in book_users[book_from['book_id']]:
+        for user_to_id in book_users[book_from['book_id']]: #ищем по пользователям, кто брал такую же книгу
             if user_to_id != user_from_id:
                 for book_to_id in user_books[user_to_id]:
                     book_to = book_info[book_to_id]
@@ -171,7 +172,7 @@ def get_best_books_for_rubrics(history, rubrics, user_from_id):
                         continue
                     if book_to_id not in book_weights:
                         book_weights[book_to_id] = 0
-                    book_weights[book_to_id] += 1
+                    book_weights[book_to_id] += 1 #увеличиваем веса книг, взятых другим пользователем по рубрике
     book_by_titles = {}
     for book_id in book_weights.keys():
         book = book_info[book_id]
@@ -182,4 +183,4 @@ def get_best_books_for_rubrics(history, rubrics, user_from_id):
         book_by_titles.values(), 
         key=lambda book: book_weights[book['book_id']],
         reverse=True
-    )
+    ) #возвращаем полученный список книг, начиная с самых часто встречающихся
